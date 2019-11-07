@@ -36,5 +36,21 @@ $("#add-train-btn").on("click", function(event){
     database.ref().push(newTrain);
 
     console.log("Train added to database successfully");
+    $("#train-name-input").val("");
+    $("#destination-input").val("");
+    $("#first-train-input").val("");
+    $("#frequency-input").val("");
+});
+
+database.ref().on("child_added", function(snapshot){
+    console.log(snapshot.val());
+    const trainName = snapshot.val().trainName;
+    const destination = snapshot.val().destination;
+    const firstTrainTime = snapshot.val().firstTrainTime;
+    const frequency = snapshot.val().frequency;
+
+    console.log(trainName);
+
+
 
 });
