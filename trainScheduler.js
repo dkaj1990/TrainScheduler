@@ -14,6 +14,8 @@ const firebaseConfig = {
   firebase.initializeApp(firebaseConfig);
   console.log(firebase);
 
+  const database = firebase.database();
+
 $("#add-train-btn").on("click", function(event){
     event.preventDefault();
 
@@ -24,5 +26,15 @@ $("#add-train-btn").on("click", function(event){
     const frequency = $("#frequency-input").val().trim();
     //console.log(trainName + " "+destination + " " + firstTrainTime +" " + frequency);
     
+    //Create an object to hold these values 
+    const newTrain = {
+        trainName,
+        destination,
+        firstTrainTime,
+        frequency
+    };
+    database.ref().push(newTrain);
+
+    console.log("Train added to database successfully");
 
 });
