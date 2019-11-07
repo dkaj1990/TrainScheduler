@@ -13,3 +13,16 @@ const firebaseConfig = {
   //Initialize firebase
   firebase.initializeApp(firebaseConfig);
   console.log(firebase);
+
+$("#add-train-btn").on("click", function(event){
+    event.preventDefault();
+
+    //Get input values 
+    const trainName = $("#train-name-input").val().trim();
+    const destination = $("#destination-input").val().trim();
+    const firstTrainTime = $("#first-train-input").val().trim();
+    const frequency = $("#frequency-input").val().trim();
+    //console.log(trainName + " "+destination + " " + firstTrainTime +" " + frequency);
+    
+
+});
