@@ -36,6 +36,7 @@ $("#add-train-btn").on("click", function(event){
     database.ref().push(newTrain);
 
     console.log("Train added to database successfully");
+
     $("#train-name-input").val("");
     $("#destination-input").val("");
     $("#first-train-input").val("");
@@ -46,11 +47,40 @@ database.ref().on("child_added", function(snapshot){
     console.log(snapshot.val());
     const trainName = snapshot.val().trainName;
     const destination = snapshot.val().destination;
-    const firstTrainTime = snapshot.val().firstTrainTime;
+    let firstTrainTime = snapshot.val().firstTrainTime;
     const frequency = snapshot.val().frequency;
 
     console.log(trainName);
+    firstTrainTime = firstTrainTime.replace("am", "");
+    console.log(firstTrainTime);
+    const firstTimeConverted = moment(firstTrainTime, "HH:mm");
+    console.log("First time converted "+ firstTimeConverted);
 
+    const currentTime = moment();
+    console.log(moment(currentTime).format("hh:mm"));
 
+    const diffTime = moment().diff(moment(firstTimeConverted), "minutes");
+    console.log("Diff in time: "+ diffTime);
+
+    const tRemainder = diffTime % frequency;
+    console.log(tRemainder);
+    
+    let minutesAway = frequency - tRemainder;
+    console.log("minutes away "+ minutesAway);    
+    
+    let nextArrival = moment().add(minutesAway, "minutes") ;
+    console.log(moment(nextArrival).format("hh:mm"));
+    
+
+    //create ne row
+    const newRow = $("<tr>").append(
+        $("<td>").text(trainName),
+        $("<td>").text(destination),
+        $("<td>").text(frequency),
+        $("<td>").text(moment(nextArrival).format("hh:mm")),
+        $("<td>").text(minutesAway),
+    );
+
+    $("#train-table > tbody").append(newRow);
 
 });

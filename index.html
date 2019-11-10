@@ -7,14 +7,14 @@
     <title>Train Scheduler</title>
     <!--Added Bootstrap cdn-->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-
+    <script src="https://cdn.jsdelivr.net/npm/moment@2.24.0/moment.min.js"></script>
 </head>
 <body class="bg-dark">
     <div class="container">
 
         <!--Jumbotron-->
         <div class="jumbotron">
-            <h1 class="text-center">All Aborad..</h1>
+            <h1 class="text-center">All Aboard..</h1>
         </div>
 
         <div class="row">
@@ -26,7 +26,7 @@
                     </div>
                     <div class="card-body p-5">
                         <!--Table to hold train name, destination, frequency(min), next arrival, minutes away-->
-                        <table class="table table-hover">
+                        <table class="table table-hover" id="train-table">
                                 <thead>
                                   <tr>
                                     <th scope="col">Train Name</th>
@@ -50,9 +50,7 @@
                 </div>
             </div>
         </div>
-<div class="row">
-
-</div>
+        <br>
 
         <!--Row 2-->
         <div class="row">
@@ -80,7 +78,16 @@
                                               <label for="frequency-input">Frequency</label>
                                               <input class="form-control" id="frequency-input" placeholder="Frequency (min)">
                                             </div>
-                                            <button type="submit" class="btn btn-primary" id="add-train-btn">Submit</button>
+                                           <!-- <button type="submit" class="btn btn-primary" id="add-train-btn">Submit</button>-->
+                                            <button type="button" class="btn btn-primary" id="add-train-btn"  data-toggle="modal" data-target=".bd-example-modal-sm">Add train</button>
+
+<div class="modal fade bd-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-sm">
+    <div class="modal-content">
+      Train added to database successfully!
+    </div>
+  </div>
+</div>
                                           </form>
                             </div>
                         </div>
